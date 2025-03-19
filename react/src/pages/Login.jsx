@@ -15,7 +15,6 @@ function Login() {
         }
         axiosClient.post('/login',payLoad)
         .then(({data}) => {
-            console.log(data);
             setUser(data.user);
             setToken(data.token);
         })

@@ -19,7 +19,6 @@ function Signup() {
             password_confirmation: passwordConfirmationRef.current.value
         }
         axiosClient.post('/signup',payLoad).then(({data})=>{
-            console.log(data);
             setUser(data.user);
             setToken(data.token);
         }).catch(err => {

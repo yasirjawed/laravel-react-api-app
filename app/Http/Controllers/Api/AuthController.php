@@ -10,6 +10,12 @@ use App\Models\User;
 use Auth;
 class AuthController extends Controller
 {
+    public function me(Request $request) {
+        return response([
+            'user' => $request->user()
+        ]);
+    }
+
     public function login(LoginRequest $request) {
         $credentials = $request->validated();
         if (!Auth::attempt(['email' => $credentials['email'], 'password' => $credentials['password']])) {

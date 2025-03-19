@@ -19,12 +19,33 @@ export const ContextProvider = ({children}) => {
             localStorage.removeItem('ACCESS_TOKEN')
         }
     }
+
+    // Auto fetch user if token exists
+    // useEffect(() => {
+    //     if (token && !user.id) {
+    //         axiosClient.get('/me')
+    //         .then(({ data }) => {
+    //             setUser(data.user);
+    //         })
+    //         .catch(() => {
+    //             setUser(null);
+    //             setToken(null);
+    //         });
+    //     }
+    // }, [token]);
+
+    const logout = () => {
+        setUser({})
+        setToken(null)
+    }
+
     return(
         <StateContext.Provider value={{
             user,
             token,
             setUser,
-            setToken
+            setToken,
+            logout
         }}>
             {children}
         </StateContext.Provider>

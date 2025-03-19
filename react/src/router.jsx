@@ -6,6 +6,7 @@ import DefaultLayout from "./components/DefaultLayout.jsx";
 import NotFound from './pages/NotFound.jsx'; // Add this import for NotFound component
 import Users from './pages/Users.jsx';
 import Dashboard from "./pages/Dashboard.jsx";
+import UserForm from "./pages/UserForm.jsx";
 
 const router = createBrowserRouter([
     {
@@ -23,6 +24,14 @@ const router = createBrowserRouter([
             {
                 path: '/users',
                 element: <Users/>
+            },
+            {
+                path: '/users/create',
+                element: <UserForm key="user-create"/>
+            },
+            {
+                path: '/users/:id',
+                element: <UserForm key="user-edit"/>
             }
         ]
 

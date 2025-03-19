@@ -1,4 +1,4 @@
-import React from 'react'
+import React, {useEffect} from 'react'
 import { Outlet, Navigate, Link } from 'react-router-dom'
 import {useStateContext} from '../contexts/ContextProvider'
 import axiosClient from '../axios-client'
@@ -16,6 +16,12 @@ function DefaultLayout() {
             console.log(err)
         })
     }
+    useEffect(() => {
+        axiosClient.get('/user')
+          .then(({data}) => {
+             setUser(data)
+          })
+      }, [])
     return (
         <div id='defaultLayout'>
             <aside>
@@ -28,7 +34,7 @@ function DefaultLayout() {
                         Header
                     </div>
                     <div>
-                        {user.name}
+                        {user.name} &nbsp;
                         <a href='#' onClick={Logout}>Logout</a>
                     </div>
                 </header>
