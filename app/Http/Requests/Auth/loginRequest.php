@@ -23,7 +23,7 @@ class loginRequest extends FormRequest
     {
         return [
             'email'=>'required|exists:users,email',
-            'password' => 'required|confirmed'
+            'password' => 'required'
         ];
     }
 }

@@ -12,7 +12,7 @@ class AuthController extends Controller
 {
     public function login(LoginRequest $request) {
         $credentials = $request->validated();
-        if (!Auth::attempt($credentials)) {
+        if (!Auth::attempt(['email' => $credentials['email'], 'password' => $credentials['password']])) {
             return response([
                 'message' => 'Credentials Mismatched'
             ], 401);
@@ -42,9 +42,13 @@ class AuthController extends Controller
 
     public function logout(Request $request){
         $user = $request->user();
+        if (!$user) {
+            return response()->json([
+                'message' => 'User is null',
+                'token_from_header' => $request->header('Authorization'),
+            ], 401);
+        }
         $user->currentAccessToken()->delete();
-        return response([
-            'message' => 'User has been logged out!'
-        ]);
+        return response()->json(['message' => 'Logged out']);
     }
 }
